@@ -1,4 +1,4 @@
-package org.example;
+package org.productStar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ public class AnnuityCalculator implements ICalculator {
     private double annualInterestRate;
     private int years;
     private List<Payment> payments;
+
 
     @Override
     public void setPrincipal(double principal) { this.principal = principal; }
@@ -40,7 +41,7 @@ public class AnnuityCalculator implements ICalculator {
 
     @Override
     public double getTotalInterest() {
-        return getTotalPayment() - principal;
+        return payments.stream().mapToDouble(Payment::getInterestPayment).sum();
     }
 
     @Override

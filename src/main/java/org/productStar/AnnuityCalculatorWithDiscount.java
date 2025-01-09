@@ -3,14 +3,23 @@ package org.productStar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnnuityCalculator implements ICalculator {
+public class AnnuityCalculatorWithDiscount implements IDiscount {
     private double principal;
     private double annualInterestRate;
+    private double discount;
     private int years;
     private List<Payment> payments;
 
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
     @Override
-    public void setPrincipal(double principal) { this.principal = principal; }
+    public void setPrincipal(double principal) { this.principal = principal - discount; }
 
     @Override
     public void setAnnualInterestRate(double annualInterestRate) { this.annualInterestRate = annualInterestRate; }
@@ -39,9 +48,7 @@ public class AnnuityCalculator implements ICalculator {
     }
 
     @Override
-    public double getTotalInterest() {
-        return getTotalPayment() - principal;
-    }
+    public double getTotalInterest() {return  payments.stream().mapToDouble(Payment::getInterestPayment).sum(); }
 
     @Override
     public List<Payment> getPaymentsSchedule() {

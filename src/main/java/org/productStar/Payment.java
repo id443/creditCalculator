@@ -1,10 +1,10 @@
-package org.example;
+package org.productStar;
 
 public class Payment {
-    private int month;
-    private double principalPayment;
-    private double interestPayment;
-    private double totalPayment;
+    private final int month;
+    private final double principalPayment;
+    private final double interestPayment;
+    private final double totalPayment;
 
     public Payment(int month, double principalPayment, double interestPayment) {
         this.month = month;

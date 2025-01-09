@@ -1,4 +1,4 @@
-package org.example;
+package org.productStar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class DifferentiatedCalculator implements ICalculator {
 
     @Override
     public double getTotalInterest() {
-        return getTotalPayment() - principal;
+        return payments.stream().mapToDouble(Payment::getInterestPayment).sum();
     }
 
     @Override

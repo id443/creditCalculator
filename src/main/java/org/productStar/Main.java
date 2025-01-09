@@ -1,4 +1,4 @@
-package org.example;
+package org.productStar;
 
 import java.util.Scanner;
 
@@ -12,9 +12,6 @@ public class Main {
         System.out.println("Введите срок кредита в годах:");
         int years = scanner.nextInt();
 
-        System.out.println("Введите дату начала кредита (в формате YYYY-MM-DD):");
-        String startDate = scanner.next(); // Здесь можно добавить парсинг даты для реальных нужд
-
         System.out.println("Введите процентную ставку:");
         double annualInterestRate = scanner.nextDouble();
 
@@ -24,16 +21,21 @@ public class Main {
         ICalculator calculator;
 
         if (paymentType == 1) {
-            calculator = new AnnuityCalculator();
+                calculator = new AnnuityCalculator();
         } else {
-            calculator = new DifferentiatedCalculator();
+                calculator = new DifferentiatedCalculator();
         }
 
         calculator.setPrincipal(principal);
         calculator.setAnnualInterestRate(annualInterestRate);
         calculator.setYears(years);
+
         calculator.calculatePayments();
 
+        printSchedule(calculator);
+    }
+
+    private static void printSchedule(ICalculator calculator) {
         System.out.println("График платежей:");
         for (Payment payment : calculator.getPaymentsSchedule()) {
             System.out.printf("Месяц: %d, Платеж по основному долгу: %.2f, Процентный платеж: %.2f, Общий платеж: %.2f%n",
