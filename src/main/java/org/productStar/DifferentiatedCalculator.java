@@ -21,12 +21,13 @@ public class DifferentiatedCalculator implements ICalculator {
     @Override
     public void calculatePayments() {
         double monthlyRate = annualInterestRate / 12 / 100;
+        double restOfDebt = principal;
         payments = new ArrayList<>();
 
         for (int month = 1; month <= years * 12; month++) {
             double principalPayment = principal / (years * 12);
-            double interestPayment = principal * monthlyRate;
-            principal -= principalPayment;
+            double interestPayment = restOfDebt * monthlyRate;
+            restOfDebt -= principalPayment;
 
             payments.add(new Payment(month, principalPayment, interestPayment));
         }
